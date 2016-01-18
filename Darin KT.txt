@@ -1,0 +1,108 @@
+http://build.bridge2solutions.net:8080	Legacy jenkins
+jenkins-node01.bridge2solutions.net	
+jenkins-node02.bridge2solutions.net
+
+legacy workflow
+2 jobs
+x-SNAPSHOT	-	x is project name	periodically scans src repo, builds, deploys to dev/qa box
+x-RELEASE	-	on demand, will build tip of specified branch, then deploy to specified server
+
+
+New Process
+*************
+
+for devops
+jenkins is called devops.cp.bridge2solutions.net
+only build node is devops1.cp.bridge2solutions.net
+
+chef-> knife workstation is also on devops1.cp.bridge2solutions.net
+
+berkshelf	-	To maintain Chef dependencies
+berks
+
+[‎11/‎4/‎2015 9:24 AM] Darin Buck: 
+current policy
+anyone can deploy to dev
+qa deploys to qa
+qa decides when to deploy to uat
+pm, team lead, qa decide to deploy to prod
+[‎11/‎4/‎2015 9:25 AM] Darin Buck: 
+also production support
+
+[‎11/‎4/‎2015 9:02 AM] Darin Buck: 
+https://crowd.bridge2rewards.com/crowd/console/secure/user/browse.action
+https://issue.bridge2rewards.com
+https://wiki.bridge2rewards.com
+[‎11/‎4/‎2015 9:04 AM] Darin Buck: 
+http://code.bridge2solutions.net:8060
+svn.bridge2rewards.com
+git.bridge2solutions.net
+gerrit.cp.bridge2solutions.net
+[‎11/‎4/‎2015 9:05 AM] Darin Buck: 
+http://build.bridge2solutions.net:8080
+jenkins-node01.bridge2solutions.net
+jenkins-node02.bridge2solutions.net
+legacy workflow
+2 jobs
+[‎11/‎4/‎2015 9:06 AM] Darin Buck: 
+x-SNAPSHOT
+periodically scans src repo, builds, deploys to dev/qa box
+x-RELEASE
+[‎11/‎4/‎2015 9:08 AM] Darin Buck: 
+on demand, will build tip of specified branch, then deploy to specified server
+[‎11/‎4/‎2015 9:09 AM] Darin Buck: 
+svn->jenkins->server
+-Pdev-war
+[‎11/‎4/‎2015 9:10 AM] Darin Buck: 
+-Pqa-war
+-Puat-war
+-Pprod
+[‎11/‎4/‎2015 9:11 AM] Darin Buck: 
+svn/git->jenkins->artifactory
+jenkins->server
+jenkins will deploy to server as tomcat user
+[‎11/‎4/‎2015 9:12 AM] Darin Buck: 
+part of the provisioning process to the server is exchanging ssh keys b/w jenkins and the server node
+[‎11/‎4/‎2015 9:13 AM] Darin Buck: 
+maven coordinates
+4 coordinates
+group
+artifact
+version
+class
+[‎11/‎4/‎2015 9:14 AM] Darin Buck: 
+group-> com.b2s.(service/rewardstep)
+artifact -> project
+class is usually zip, war, jar
+[‎11/‎4/‎2015 9:20 AM] Darin Buck: 
+for devops
+jenkins is called devops.cp.bridge2solutions.net
+only build node is devops1.cp.bridge2solutions.net
+[‎11/‎4/‎2015 9:21 AM] Darin Buck: 
+chef-> knife workstation is also on devops1.cp.bridge2solutions.net
+[‎11/‎4/‎2015 9:23 AM] Darin Buck: 
+berkshelf
+berks
+[‎11/‎4/‎2015 9:24 AM] Darin Buck: 
+current policy
+anyone can deploy to dev
+qa deploys to qa
+qa decides when to deploy to uat
+pm, team lead, qa decide to deploy to prod
+[‎11/‎4/‎2015 9:25 AM] Darin Buck: 
+also production support
+[‎11/‎4/‎2015 9:27 AM] Darin Buck: 
+to deploy, sundeck will log onto node as chef user, run “chef-client”, and save output
+[‎11/‎4/‎2015 9:32 AM] Darin Buck: 
+chef concepts to know:
+nodes
+environments
+cookbooks/recipes
+2 types of cookbooks in use at b2s
+application cookbooks
+[‎11/‎4/‎2015 9:33 AM] Darin Buck: 
+application cookbook is generic way to deploy an application to a server
+the environment cookbook captures all of the unique configuration items about the envronment
+for example which services they use
+which catalog they use
+special user names and groups
