@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 chef.cp.bridge2solutions.net/organizations/b2s-default/users
+=======
+chef.cp.bridge2solutions.net/organizations/b2s-default/users-made changes to first line
+>>>>>>> dev
 =======
 chef.cp.bridge2solutions.net/organizations/b2s-default/users-made changes to first line
 >>>>>>> dev

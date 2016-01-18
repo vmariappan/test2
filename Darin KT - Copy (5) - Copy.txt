@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-http://build.bridge2solutions.net:8080	Legacy jenkins
-=======
 http://build.bridge2solutions.net:8080	Legacy jenkins New file in dev
->>>>>>> dev
 jenkins-node01.bridge2solutions.net	
 jenkins-node02.bridge2solutions.net
 
